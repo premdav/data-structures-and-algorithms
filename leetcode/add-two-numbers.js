@@ -40,71 +40,34 @@ const constructList = (val, next) => {
 const addTwoNumbers = (l1, l2) => {
     const list1 = cycleList(l1, []);
     const list2 = cycleList(l2, []);
-    let list1_num = '0', list2_num = '0';
+    let list1_num = [], list2_num = [];
     list1.forEach((elem) => {
-        list1_num = `${list1_num}${elem.val.toString()}`;
+        list1_num.push(elem.val);
     });
-    console.log(list1_num)
     
     list2.forEach((elem) => {
-        list2_num = `${list2_num}${elem.val.toString()}`;
+        list2_num.push(elem.val);
     });
-    console.log(list2_num)
     let total = [];
-    let lastOver10 = false;
     if (list1_num.length > list2_num.length){
-        for (let index = 0; index < list1_num.length; index++) {
-            if (list2_num[index] !== undefined && list2_num[index] !== null) {
-               let temp2 = (parseInt(list1_num[index], 10) + parseInt(list2_num[index], 10));
-                if (temp2 < 10) {
-                    total.push(temp2.toString());
-                    if (lastOver10) {
-                        lastOver10 = false;
-                        total[index] = (parseInt(total[index]) + 1).toString();
-                    }
-                }
-                else {
-                    if (lastOver10) {
-                        lastOver10 = false;
-                        total.push('1')
-                    }
-                    lastOver10 = true;
-                    total.push(temp2.toString().substring(1));
-                }
-            } else {
-                total.push(list1_num[index]);
-            }
+        for (let i = 0; i < list1_num.length; i++) {
+            if (list2_num[i] !== undefined) total.push(list1_num[i] + list2_num[i])
+            else total.push(list1_num[i])
         }
     } else {
-        for (let index = 0; index < list2_num.length; index++) {
-            if (list1_num[index] !== undefined && list1_num[index] !== null) {
-               let temp = (parseInt(list1_num[index], 10) + parseInt(list1_num[index], 10));
-                if (temp < 10) {
-                    total.push(temp.toString());
-                    if (lastOver10) {
-                        lastOver10 = false;
-                        total[index] = (parseInt(total[index]) + 1).toString();
-                    }
-                }
-                else {
-                    if (lastOver10) {
-                        lastOver10 = false;
-                        total.push('1')
-                    }
-                    lastOver10 = true;
-                    total.push(temp.toString().substring(1));
-                }
-            } else {
-                total.push(list2_num[index]);
-            }
+        for (let i = 0; i < list2_num.length; i++) {
+            if (list1_num[i] !== undefined) total.push(list1_num[i] + list2_num[i])
+            else total.push(list2_num[i])
         }
     }
-    total.shift();
-    const sum = total;
-    const nums = sum.map((item) => (item = parseInt(item, 10)));
-    console.log('nums', nums)
-    const next_nums = [...nums];
-    next_nums.shift();
-    return_list = constructList(nums[0], next_nums);
-    return return_list
+    
+    for (let i = 0; i < total.length; i++) {
+        if (total[i] >= 10) {
+           total[i] = total[i] % 10;
+            if(total[i+1] === undefined) total.push(1);
+            else total[i+1] += 1;
+        }
+    }
+    const first = total.shift()
+    return constructList(first, total);
 };
