@@ -38,3 +38,4 @@ const compressFirstBox = (boxes) => {
 - O(1) -> Constant Time
 - No matter how many inputs, a function or algorithm that does only one operation is O(1)
 - The amount of boxes in the above function could increase to 100000, but only one thing will happen, it will only log one box
+- All constant time algorithms, whether they do 2 or 10 operations, if it is constant, it boils down to O(1)
