@@ -1,4 +1,5 @@
 '''
+Full problem definition can be found in problemDefinitions folder - diagonalDifference.pdf
 Given a square matrix, calculate the absolute difference between the sums of its diagonals.
 
 For example, the square matrix `arr` is shown below:
