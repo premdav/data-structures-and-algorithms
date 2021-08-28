@@ -14,7 +14,6 @@ import sys
 #
 
 def countingSort(arr):
-    # Write your code here
     freq = [0] * len(arr)
     for i in range(len(arr)):
        freq[arr[i]] += 1

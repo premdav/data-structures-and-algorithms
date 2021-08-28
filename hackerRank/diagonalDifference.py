@@ -57,7 +57,6 @@ import sys
 #
 
 def diagonalDifference(arr):
-    # Write your code here
     l_dif = 0
     r_dif = 0
     total_len = len(arr)
