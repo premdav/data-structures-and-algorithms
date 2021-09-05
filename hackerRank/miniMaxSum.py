@@ -1,5 +1,5 @@
 #!/bin/python3
-
+from functools import reduce
 import math
 import os
 import random
@@ -13,13 +13,9 @@ import sys
 #
 
 def miniMaxSum(arr):
-    arr.sort()
-    sum, min, max = 0, 0, 0
-    for item in arr:
-        sum += item
-    min = sum - arr[len(arr) - 1]
-    max = sum - arr[0]
-    print(min, max)
+    min = reduce(lambda x,y: x + y, sorted(arr)[:-1])
+    max = reduce(lambda x, y: x + y, sorted(arr)[1:])
+    print(min,max)
 
 if __name__ == '__main__':
 
